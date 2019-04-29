@@ -1,0 +1,14 @@
+<script>
+  let requested_data = '{{response_json}}'; //getting the data in json format from the lighttouch server
+  
+  requested_data = requested_data.replace(/&quot;/g,"\""); //replacing &quot; mark for " for javascript
+  requested_data = requested_data.replace(/&#x2f;/g,"/"); //replacing &#x2f; mark for /  for urls 
+  
+  requested_data = JSON.parse(requested_data);
+
+
+</script>
+
+<script>
+  {% include "javascript/tabulator.min.js" %}
+</script>
