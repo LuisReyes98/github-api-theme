@@ -1,0 +1,4 @@
+flex
+p-4
+bg-green-lighter
+rounded

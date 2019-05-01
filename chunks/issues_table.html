@@ -1,7 +1,10 @@
-<div class="m-1 bg-grey-light p-4 rounded">
+<div git_table >
   <h1> Issue table</h1>
   
-  <div id="{{issue_table_id}}">
-  
-  </div>
+  {% include "chunks/issues_table_filter.html" %}
+
+  <!-- Tabulator.js table to display all of the data -->
+  <div id="{{issue_table_id}}"></div>
+
+
 </div>
