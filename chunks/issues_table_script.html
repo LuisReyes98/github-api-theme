@@ -10,10 +10,13 @@
 
   class Issue {
         
-    constructor(title,issue_url,created_date){      
+    constructor(title,body,issue_url,created_date,labels){
       this.title = title;
+      this.body = body;
       this.issue_url = issue_url;
       this.created_date = this.format_date(created_date);
+      this.labels = labels; //an array of labels
+
     }
     
     format_date(date_string) {
@@ -22,6 +25,7 @@
       return `${d.getUTCDay()}/${d.getUTCMonth()}/${d.getUTCFullYear()}`;
     }
   }   
+  // function to open an url in a new tab
   function openURL(url) {
     window.open(url, '_blank');
   }
@@ -32,20 +36,35 @@
   requested_data = JSON.parse(requested_data);
 
   // This considering is the github request
+
   let cleaned_data = requested_data.items.map(function(item) {
+    let labels = " "
+    try {
+      labels = item.labels.map( el => el.name);
+    } catch (error) {
+      
+    }
+
     return new Issue(
       item.title,
+      item.body,
       item.html_url,
-      item.created_at
+      item.created_at,
+      labels,
     );
   });
 
   var table = new Tabulator(tableId, {
     data:cleaned_data,
+    autoResize:true,
+    pagination:"local", //enable local pagination.
+    paginationSize:4,
+    // responsiveLayout:true,
     columns:[
       { title: "Title" , field:"title" , sorter:"string" },
-      { title: "Issue URL", field:"issue_url", sorter:"string" ,cellClick:function(e, cell){openURL(cell._cell.value);}
-      },
+      { title: "Body" , field:"body" , sorter:"string" },
+      { title: "Labels" , field:"labels" , sorter:"string" },
+      { title: "Issue URL", field:"issue_url", sorter:"string"},
       { title: "Created at" , field:"created_date", sorter:"string" },
     ],
   });
