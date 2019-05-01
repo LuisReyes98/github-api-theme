@@ -1,14 +1,54 @@
 <script>
-  let requested_data = '{{response_json}}'; //getting the data in json format from the lighttouch server
   
+</script>
+
+<script>
+  {% include "javascript/tabulator.min.js" %}
+
+  let requested_data = '{{response_json}}'; //getting the data in json format from the lighttouch server
+  let tableId = "#{{issue_table_id}}";
+
+  class Issue {
+        
+    constructor(title,issue_url,created_date){      
+      this.title = title;
+      this.issue_url = issue_url;
+      this.created_date = this.format_date(created_date);
+    }
+    
+    format_date(date_string) {
+      let d = new Date(date_string);
+      
+      return `${d.getUTCDay()}/${d.getUTCMonth()}/${d.getUTCFullYear()}`;
+    }
+  }   
+  function openURL(url) {
+    window.open(url, '_blank');
+  }
+
   requested_data = requested_data.replace(/&quot;/g,"\""); //replacing &quot; mark for " for javascript
   requested_data = requested_data.replace(/&#x2f;/g,"/"); //replacing &#x2f; mark for /  for urls 
   
   requested_data = JSON.parse(requested_data);
 
+  // This considering is the github request
+  let cleaned_data = requested_data.items.map(function(item) {
+    return new Issue(
+      item.title,
+      item.html_url,
+      item.created_at
+    );
+  });
+
+  var table = new Tabulator(tableId, {
+    data:cleaned_data,
+    columns:[
+      { title: "Title" , field:"title" , sorter:"string" },
+      { title: "Issue URL", field:"issue_url", sorter:"string" ,cellClick:function(e, cell){openURL(cell._cell.value);}
+      },
+      { title: "Created at" , field:"created_date", sorter:"string" },
+    ],
+  });
 
 </script>
 
-<script>
-  {% include "javascript/tabulator.min.js" %}
-</script>
