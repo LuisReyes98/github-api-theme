@@ -6,20 +6,31 @@ let tableId = "#{{issue_table_id}}";
 
 // Class to standarize the data 
 class Issue {
-  constructor(status, title, body, issue_url, created_date, labels) {
+  constructor(status, title, body, subject, labels, creator, locked, assignees, comments, author_association, created_at, updated_at, closed_at) {
     this.status = status;
     this.title = title;
     this.body = body;
-    this.issue_url = issue_url;
-    this.created_date = this.format_date(created_date);
+    this.subject = subject;
     this.labels = labels; //an array of labels
+    this.creator = creator;
+    this.locked = locked;
+    this.assignees = assignees;
+    this.comments = comments; //an array of comments
+    this.author_association = author_association;
+    this.created_at = this.format_date(created_at);
+    this.updated_at = this.format_date(updated_at);
+    this.closed_at = this.format_date(closed_at);
 
   }
 
   format_date(date_string) {
-    let d = new Date(date_string);
+    try {
+      let d = new Date(date_string);
+      return `${d.getUTCMonth()}/${d.getUTCDay()}/${d.getUTCFullYear()}`;      
+    } catch (error) {
+      return false;
+    }
 
-    return `${d.getUTCMonth()}/${d.getUTCDay()}/${d.getUTCFullYear()}`;
   }
 }
 
@@ -33,17 +44,32 @@ requested_data = JSON.parse(requested_data);
 // turning the js hash into an array of Issue prototype in order to properly display data
 let cleaned_data = requested_data.items.map(function (item) {
   let labels = " "
+  let assignees = " "
+  let comments = " "
   try {  
     labels = item.labels.map(el => el.name); 
   } catch (error) { }
+  try {
+    assignees = item.assignees.map(el => el.name);
+  } catch (error) {}
+  try {
+    comments = item.comments.map(el => `${el.title} by ${el.creator}:\n ${el.body}`);
+  } catch (error) {}
 
   return new Issue(
     item.state,
     item.title,
     item.body,
-    item.html_url,
-    item.created_at,
+    item.subject,
     labels,
+    item.creator,
+    item.locked,
+    assignees,
+    comments,
+    item.author_association,
+    item.created_at,
+    item.updated_at,
+    item.closed_at,
   );
 });
 
@@ -59,39 +85,42 @@ let table = new Tabulator(tableId, {
   movableColumns: true, //allow column order to be changed
   resizableRows: true, //allow rows size to change
   // responsiveLayout:true,
-  columns: [
-    {
-      title: "Status",
-      field: "status",
-      sorter: "string"
-    },
-    {
-      title: "Title",
-      field: "title",
-      sorter: "string"
-    },
-    {
-      title: "Body",
-      field: "body",
-      sorter: "string"
-    },
-    {
-      title: "Labels",
-      field: "labels",
-      sorter: "string"
-    },
-    {
-      title: "Issue URL",
-      field: "issue_url",
-      sorter: "string"
-    },
-    {
-      title: "Created at",
-      field: "created_date",
-      sorter: "string"
-    },
-  ],
+  autoColumns: true,
+  // columns: [
+  //   {
+  //     title: "Status",
+  //     field: "status",
+  //     sorter: "string"
+  //   },
+  //   {
+  //     title: "Title",
+  //     field: "title",
+  //     sorter: "string"
+  //   },
+  //   {
+  //     title: "Body",
+  //     field: "body",
+  //     sorter: "string"
+  //   },
+  //   {
+  //     title: "Labels",
+  //     field: "labels",
+  //     sorter: "string"
+  //   },
+  //   {
+  //     title: "Issue URL",
+  //     field: "issue_url",
+  //     sorter: "string"
+  //   },
+  //   {
+  //     title: "Created at",
+  //     field: "created_date",
+  //     sorter: "string"
+  //   },
+  // ],
 });
+
+// Filtering functions
 
 function clearTableFilters() {
   $("#table-filter-field").val("");

@@ -5,24 +5,13 @@
   <select type_field id="table-filter-field">
     <option value=""> Select One</option>
 
-    <option value="status">
-      Status
+    {% for column in issue_columns %}
+    <option value="{{column.value}}">
+      {{column.name}}
     </option>
-    <option value="title">
-      Title
-    </option>
-    <option value="body">
-      Body
-    </option>
-    <option value="labels">
-      Labels
-    </option>
-    <option value="issue_url">
-      Issue URL
-    </option>
-    <option value="created_date">
-      Created at
-    </option>
+    
+    {% endfor %}
+
   </select>
 
   <label field for="table-filter-value">
