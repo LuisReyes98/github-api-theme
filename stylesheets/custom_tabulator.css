@@ -657,6 +657,22 @@
 .tabulator-cell {
   white-space: initial;
   overflow: visible;
-  text-overflow: none; }
+  text-overflow: none;
+  height: 100px;
+  width: 400px; }
 
-/*# sourceMappingURL=custom_tabulator_bootstrap4.min.css.map */
+.tabulator-row {
+  display: flex;
+  flex-wrap: wrap;
+  height: 500px; }
+
+.tabulator-col {
+  height: 40px;
+  width: 100px; }
+
+.tabulator-headers {
+  display: flex;
+  flex-wrap: wrap;
+  height: 400px; }
+
+/*# sourceMappingURL=custom_tabulator.css.map */

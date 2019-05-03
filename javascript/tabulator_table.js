@@ -6,8 +6,8 @@ let tableId = "#{{issue_table_id}}";
 
 // Class to standarize the data 
 class Issue {
-  constructor(status, title, body, subject, labels, creator, locked, assignees, comments, author_association, created_at, updated_at, closed_at) {
-    this.status = status;
+  constructor(state, title, body, subject, labels, creator, locked, assignees, comments, author_association, created_at, updated_at, closed_at) {
+    this.state = state;
     this.title = title;
     this.body = body;
     this.subject = subject;
@@ -49,7 +49,7 @@ let cleaned_data = requested_data.items.map(function (item) {
     assignees = item.assignees.map(el => el.name);
   } catch (error) {}
   try {
-    comments = item.comments.map(el => `${el.title} by ${el.creator}:\n ${el.body}`);
+    comments = item.comments_content.map(el => `${el.title} by ${el.creator}:\n ${el.body}`);
   } catch (error) {}
 
   return new Issue(
@@ -77,12 +77,18 @@ let table = new Tabulator(tableId, {
   autoResize: true,
   pagination: "local", //enable local pagination.
   paginationSize: 4, //ammoun of elements per page
-  layout: "fitColumns", //Tell the columns to fit in the screen
-  movableColumns: true, //allow column order to be changed
-  resizableRows: true, //allow rows size to change
-  // responsiveLayout:true,
-  autoColumns: true,
-  // columns: [
+  // layout: "fitColumns", //Tell the columns to fit in the screen
+  // movableColumns: true, //allow column order to be changed
+  // resizableRows: true, //allow rows size to change
+  columns: [
+    {% for column in issue_columns %}
+      {
+        title: "{{column.name}}",
+        field: "{{column.value}}",
+        sorter: "string",
+        formatter: "plaintext"
+      },
+    {% endfor %}
   //   {
   //     title: "Status",
   //     field: "status",
@@ -113,7 +119,8 @@ let table = new Tabulator(tableId, {
   //     field: "created_date",
   //     sorter: "string"
   //   },
-  // ],
+  ],
+
 });
 
 // Filtering functions

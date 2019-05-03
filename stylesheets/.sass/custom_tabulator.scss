@@ -1,8 +1,28 @@
 @import 'tabulator_bootstrap4.scss';
 
+.tabulator{
+  // display: grid;
+  // grid-template-columns: 1fr; 
+}
 
 .tabulator-cell {
   white-space: initial;
   overflow: visible;
   text-overflow: none;
+  height: 100px;
+  width: 400px;
+}
+.tabulator-row{
+  display: flex;
+  flex-wrap: wrap;
+  height: 500px;
+}
+.tabulator-col{
+  height: 40px;
+  width: 100px;
+}
+.tabulator-headers{
+  display: flex;
+  flex-wrap: wrap;
+  height: 400px;
 }
