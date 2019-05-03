@@ -24,13 +24,9 @@ class Issue {
   }
 
   format_date(date_string) {
-    try {
-      let d = new Date(date_string);
-      return `${d.getUTCMonth()}/${d.getUTCDay()}/${d.getUTCFullYear()}`;      
-    } catch (error) {
-      return false;
-    }
-
+    let d = new Date(date_string);
+    return `${d.getUTCMonth()}/${d.getUTCDay()}/${d.getUTCFullYear()}`;      
+    
   }
 }
 
@@ -121,6 +117,7 @@ let table = new Tabulator(tableId, {
 });
 
 // Filtering functions
+// This could be done without Jquery if jquery wont be used for anythin else this should be refactor to plain js
 
 function clearTableFilters() {
   $("#table-filter-field").val("");
