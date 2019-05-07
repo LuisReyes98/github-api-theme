@@ -4,7 +4,21 @@
 let requested_data = '{{response_json}}'; //getting the data in json format from the lighttouch server
 let tableId = "#{{issue_table_id}}";
 
+let github_data = '';
 // Class to standarize the data 
+
+function temporal_json_parser(the_json) {
+  
+}
+// github_data = github_data.replace(/&quot;/g, "\""); //replacing &quot; mark for " for javascript
+// github_data = github_data.replace(/&#x2f;/g, "/"); //replacing &#x2f; mark for /  for urls 
+// github_data = JSON.parse(github_data);
+
+// Transforming data sended by the server into a js hash
+requested_data = requested_data.replace(/&quot;/g, "\""); //replacing &quot; mark for " for javascript
+requested_data = requested_data.replace(/&#x2f;/g, "/"); //replacing &#x2f; mark for /  for urls 
+requested_data = JSON.parse(requested_data);
+
 class Issue {
   constructor(state, title, body, subject, labels, creator, locked, assignees, comments, author_association, created_at, updated_at, closed_at) {
     this.state = state;
@@ -29,12 +43,6 @@ class Issue {
     
   }
 }
-
-// Transforming data sended by the server into a js hash
-requested_data = requested_data.replace(/&quot;/g, "\""); //replacing &quot; mark for " for javascript
-requested_data = requested_data.replace(/&#x2f;/g, "/"); //replacing &#x2f; mark for /  for urls 
-requested_data = JSON.parse(requested_data);
-
 // This considering is the github request
 
 // turning the js hash into an array of Issue prototype in order to properly display data
@@ -74,20 +82,35 @@ let cleaned_data = requested_data.items.map(function (item) {
 // Tabulator component
 let table = new Tabulator(tableId, {
   data: cleaned_data,
+  // rowFormatter: function (row) {
+  //   row.getElement().addClass("bg-red-dark"); //mark rows with age greater than or equal to 18 as successful;
+  // },
   autoResize: true,
   pagination: "local", //enable local pagination.
   paginationSize: 6, //ammount of elements per page  
+  // rowUpdated: function (row) {
+  //   //row - row component
+  //   row.setAttribute("id", "lighttouch_id");
+  //   console.log(row);
+  // },
+  // rowSelected: function (row) {
+  //   row.setAttribute("id", "lighttouch_id");
+
+  //   //row - row component for the selected row
+  // },
   // layout: "fitColumns", //Tell the columns to fit in the screen
   // movableColumns: true, //allow column order to be changed
   // resizableRows: true, //allow rows size to change
   tooltips: true,            //show tool tips on cells
+  // layout: "fitDataFill",//fit data in the cell
   columns: [
     {% for column in issue_columns %}
       {
         title: "{{column.name}}",
         field: "{{column.value}}",
         sorter: "string",
-        formatter: "plaintext"
+        formatter: "plaintext",
+        // resizable: false,
       },
     {% endfor %}
   ],

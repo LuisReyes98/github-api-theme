@@ -2,24 +2,22 @@
 
 // adding tabulator classes later to overwrite the styles
 
-// .item-container {
-//   display: grid;
-//   grid-template-columns: 2em 2em 10fr 2fr 2fr 2fr 2fr 5em 5em;
-// }
 .tabulator{
-  width: 100%;
+  width: 98%;
+  padding: 4px;
 }
+
+.tabulator-col-resize-handle{
+  opacity: 0;
+}
+
 
 $test_columns: 100 / 7 ;
 
 %grid_container{
-  // display: flex;
-  // flex-wrap: wrap;
-  
   display: grid;
-  // currently there are 13 fields , need to be refactor for responsiveness later
   // grid-template-columns: repeat(7, #{ $test_columns + '%' });
-  grid-template-columns: repeat(1, .5fr);
+  grid-template-columns: repeat(5, .95fr);
   grid-column-gap: 0px;
   width: 100%;
   
@@ -27,13 +25,16 @@ $test_columns: 100 / 7 ;
 
 %grid_item{
   border: 1px solid #999999;
-  box-sizing: border-box;
+
+  // border-bottom: 1px solid #999999;
+  // border-right: 1px solid #999999;
+  // border-left: 1px solid #999999;
+
+  // box-sizing: border-box;
   
   &:hover{
     background-color: #e0dede;
   }
-
-  // grid-template-columns: minmax(9em, 30%) 1fr;
 }
 // Container of all the headers of columns
 .tabulator-headers{
@@ -59,10 +60,10 @@ $test_columns: 100 / 7 ;
 // Container of each data of the table
 .tabulator-cell {
   @extend %grid_item;
-
-  overflow: visible;
-  
-
-  white-space: initial;
-  text-overflow: clip;
+  width: auto;
+  height: auto;
+  // overflow: visible;  
+  // white-space: initial;
+  // text-overflow: clip;
+  // word-wrap: normal;
 }
