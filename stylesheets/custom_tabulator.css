@@ -654,25 +654,30 @@
     padding-top: 6px;
     font-weight: bold; }
 
-.tabulator-cell {
-  white-space: initial;
-  overflow: visible;
-  text-overflow: none;
-  height: 100px;
-  width: 400px; }
+.tabulator {
+  width: 100%; }
 
-.tabulator-row {
-  display: flex;
-  flex-wrap: wrap;
-  height: 500px; }
+.tabulator-headers, .tabulator-row {
+  display: grid;
+  grid-template-columns: repeat(1, 0.5fr);
+  grid-column-gap: 0px;
+  width: 100%; }
 
-.tabulator-col {
-  height: 40px;
-  width: 100px; }
+.tabulator-col, .tabulator-cell {
+  border: 1px solid #999999;
+  box-sizing: border-box; }
+  .tabulator-col:hover, .tabulator-cell:hover {
+    background-color: #e0dede; }
 
 .tabulator-headers {
-  display: flex;
-  flex-wrap: wrap;
-  height: 400px; }
+  grid-auto-rows: minmax(30px, auto); }
+
+.tabulator-row {
+  grid-auto-rows: minmax(150px, auto); }
+
+.tabulator-cell {
+  overflow: visible;
+  white-space: initial;
+  text-overflow: clip; }
 
 /*# sourceMappingURL=custom_tabulator.css.map */

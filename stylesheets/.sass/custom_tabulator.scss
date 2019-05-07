@@ -1,28 +1,68 @@
 @import 'tabulator_bootstrap4.scss';
 
+// adding tabulator classes later to overwrite the styles
+
+// .item-container {
+//   display: grid;
+//   grid-template-columns: 2em 2em 10fr 2fr 2fr 2fr 2fr 5em 5em;
+// }
 .tabulator{
-  // display: grid;
-  // grid-template-columns: 1fr; 
+  width: 100%;
 }
 
-.tabulator-cell {
-  white-space: initial;
-  overflow: visible;
-  text-overflow: none;
-  height: 100px;
-  width: 400px;
+$test_columns: 100 / 7 ;
+
+%grid_container{
+  // display: flex;
+  // flex-wrap: wrap;
+  
+  display: grid;
+  // currently there are 13 fields , need to be refactor for responsiveness later
+  // grid-template-columns: repeat(7, #{ $test_columns + '%' });
+  grid-template-columns: repeat(1, .5fr);
+  grid-column-gap: 0px;
+  width: 100%;
+  
 }
-.tabulator-row{
-  display: flex;
-  flex-wrap: wrap;
-  height: 500px;
+
+%grid_item{
+  border: 1px solid #999999;
+  box-sizing: border-box;
+  
+  &:hover{
+    background-color: #e0dede;
+  }
+
+  // grid-template-columns: minmax(9em, 30%) 1fr;
 }
-.tabulator-col{
-  height: 40px;
-  width: 100px;
-}
+// Container of all the headers of columns
 .tabulator-headers{
-  display: flex;
-  flex-wrap: wrap;
-  height: 400px;
+  @extend %grid_container;
+  grid-auto-rows: minmax(30px, auto);
+
+}
+
+// Container of each individual header
+.tabulator-col{
+  @extend %grid_item;
+
+}
+
+// Container of each row of data
+.tabulator-row{
+  @extend %grid_container;
+  grid-auto-rows: minmax(150px, auto);
+
+}
+
+
+// Container of each data of the table
+.tabulator-cell {
+  @extend %grid_item;
+
+  overflow: visible;
+  
+
+  white-space: initial;
+  text-overflow: clip;
 }

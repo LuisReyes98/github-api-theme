@@ -76,10 +76,11 @@ let table = new Tabulator(tableId, {
   data: cleaned_data,
   autoResize: true,
   pagination: "local", //enable local pagination.
-  paginationSize: 4, //ammoun of elements per page
+  paginationSize: 6, //ammount of elements per page  
   // layout: "fitColumns", //Tell the columns to fit in the screen
   // movableColumns: true, //allow column order to be changed
   // resizableRows: true, //allow rows size to change
+  tooltips: true,            //show tool tips on cells
   columns: [
     {% for column in issue_columns %}
       {
@@ -89,36 +90,6 @@ let table = new Tabulator(tableId, {
         formatter: "plaintext"
       },
     {% endfor %}
-  //   {
-  //     title: "Status",
-  //     field: "status",
-  //     sorter: "string"
-  //   },
-  //   {
-  //     title: "Title",
-  //     field: "title",
-  //     sorter: "string"
-  //   },
-  //   {
-  //     title: "Body",
-  //     field: "body",
-  //     sorter: "string"
-  //   },
-  //   {
-  //     title: "Labels",
-  //     field: "labels",
-  //     sorter: "string"
-  //   },
-  //   {
-  //     title: "Issue URL",
-  //     field: "issue_url",
-  //     sorter: "string"
-  //   },
-  //   {
-  //     title: "Created at",
-  //     field: "created_date",
-  //     sorter: "string"
-  //   },
   ],
 
 });
