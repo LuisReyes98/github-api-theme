@@ -81,23 +81,10 @@ let cleaned_data = requested_data.items.map(function (item) {
 
 // Tabulator component
 let table = new Tabulator(tableId, {
-  data: cleaned_data,
-  // rowFormatter: function (row) {
-  //   row.getElement().addClass("bg-red-dark"); //mark rows with age greater than or equal to 18 as successful;
-  // },
-  autoResize: true,
+  data: cleaned_data,  
+  // autoResize: true,
   pagination: "local", //enable local pagination.
-  paginationSize: 6, //ammount of elements per page  
-  // rowUpdated: function (row) {
-  //   //row - row component
-  //   row.setAttribute("id", "lighttouch_id");
-  //   console.log(row);
-  // },
-  // rowSelected: function (row) {
-  //   row.setAttribute("id", "lighttouch_id");
-
-  //   //row - row component for the selected row
-  // },
+  paginationSize: 2, //ammount of elements per page  
   // layout: "fitColumns", //Tell the columns to fit in the screen
   // movableColumns: true, //allow column order to be changed
   // resizableRows: true, //allow rows size to change

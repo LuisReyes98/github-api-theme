@@ -5872,12 +5872,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 		this.element = document.createElement('div');
 
-		this.element.setAttribute("lighttouch_cell_id", "");
-
 		this.element.className = "tabulator-cell";
 
 		this.element.setAttribute("role", "gridcell");
-
 
 		this.element = this.element;
 	};
