@@ -1,36 +1,35 @@
 @import 'tabulator_bootstrap4.scss';
+@import 'custom_mixins';
 
 // adding tabulator classes later to overwrite the styles
 
-.tabulator{
-  width: 98%;
-  padding: 4px;
-}
-
-.tabulator-col-resize-handle{
-  opacity: 0;
-}
-
-
-$test_columns: 100 / 7 ;
 
 %grid_container{
   display: grid;
-  // grid-template-columns: repeat(7, #{ $test_columns + '%' });
-  grid-template-columns: repeat(5, .95fr);
-  grid-column-gap: 0px;
-  width: 100%;
+  grid-template-columns: repeat(1,minmax(20px, 100%));
+  
+  @include screen_sm(){
+    grid-template-columns: repeat(1, minmax(20px, 100%));
+
+  }
+  @include screen_md() {
+    grid-template-columns: repeat(4, minmax(20px, 100%));
+
+  }
+  @include screen_lg() {
+    grid-template-columns: repeat(6, minmax(20px, 100%));
+
+  }
+
+  @include screen_xl() {
+    grid-template-columns: repeat(8, minmax(20px, 100%));
+
+  }
   
 }
 
 %grid_item{
   border: 1px solid #999999;
-
-  // border-bottom: 1px solid #999999;
-  // border-right: 1px solid #999999;
-  // border-left: 1px solid #999999;
-
-  // box-sizing: border-box;
   
   &:hover{
     background-color: #e0dede;
@@ -39,31 +38,50 @@ $test_columns: 100 / 7 ;
 // Container of all the headers of columns
 .tabulator-headers{
   @extend %grid_container;
-  grid-auto-rows: minmax(30px, auto);
 
 }
 
-// Container of each individual header
+// Container of each column inside the header
 .tabulator-col{
   @extend %grid_item;
-
 }
 
 // Container of each row of data
 .tabulator-row{
   @extend %grid_container;
-  grid-auto-rows: minmax(150px, auto);
+  grid-template-rows: minmax(30px, 100%);
+}
+
+
+// Container of data inside a row
+.tabulator-cell {
+  @extend %grid_item;
+  height: auto;
+  white-space: normal !important;
+  text-overflow: clip !important;
+  padding-bottom: 10px;
+  word-break: break-all;
+  // overflow-x: scroll !important;
 
 }
 
 
-// Container of each data of the table
-.tabulator-cell {
-  @extend %grid_item;
-  width: auto;
-  height: auto;
-  // overflow: visible;  
-  // white-space: initial;
-  // text-overflow: clip;
-  // word-wrap: normal;
+.tabulator-col-content{
+  background-color: #22292f;  
+  &:hover{
+    background-color: #000;
+  }
+
+}
+.tabulator-col-title{
+  color: #FFF;
+
+}
+
+.tabulator-row-odd{
+  background-color: #FFF;
+} 
+.tabulator-row-even{
+  background-color: #dae1e7;
+
 }

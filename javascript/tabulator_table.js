@@ -84,19 +84,21 @@ let table = new Tabulator(tableId, {
   data: cleaned_data,  
   // autoResize: true,
   pagination: "local", //enable local pagination.
-  paginationSize: 2, //ammount of elements per page  
-  // layout: "fitColumns", //Tell the columns to fit in the screen
-  // movableColumns: true, //allow column order to be changed
-  // resizableRows: true, //allow rows size to change
+  paginationSize: 4, //ammount of elements per page  
+  // movableColumns: true, //allow column order to be changed  
   tooltips: true,            //show tool tips on cells
-  // layout: "fitDataFill",//fit data in the cell
+  // layout: "fitColumns",
   columns: [
     {% for column in issue_columns %}
       {
         title: "{{column.name}}",
         field: "{{column.value}}",
         sorter: "string",
-        formatter: "plaintext",
+        headerFilter: "input",
+        headerFilterPlaceholder: "Filter {{column.name}}",
+        headerFilterFunc: "like",
+        formatter: "textarea",
+        
         // resizable: false,
       },
     {% endfor %}
@@ -104,25 +106,30 @@ let table = new Tabulator(tableId, {
 
 });
 
+// function to reload the table when the browser window changes size
+window.addEventListener('resize', function () {
+  table.redraw(true); //reloading table visuals
+});
+
 // Filtering functions
 // This could be done without Jquery if jquery wont be used for anythin else this should be refactor to plain js
 
-function clearTableFilters() {
-  $("#table-filter-field").val("");
-  $("#table-filter-value").val("");
+// function clearTableFilters() {
+//   $("#table-filter-field").val("");
+//   $("#table-filter-value").val("");
 
-  table.clearFilter();
-}
-// Table filters
+//   table.clearFilter();
+// }
+// // Table filters
 
-function updateFilter() {
-  var filter = $("#table-filter-field").val();
-  if (filter !== "") {
-    $("#table-filter-value").prop("disabled", false);  
-    table.setFilter(filter, "like", $("#table-filter-value").val()); //to search values like the input    
-  }
-}
+// function updateFilter() {
+//   var filter = $("#table-filter-field").val();
+//   if (filter !== "") {
+//     $("#table-filter-value").prop("disabled", false);  
+//     table.setFilter(filter, "like", $("#table-filter-value").val()); //to search values like the input    
+//   }
+// }
 
-//Update filters on value change
-$("#table-filter-field").change(updateFilter);
-$("#table-filter-value").keyup(updateFilter);
+// //Update filters on value change
+// $("#table-filter-field").change(updateFilter);
+// $("#table-filter-value").keyup(updateFilter);
