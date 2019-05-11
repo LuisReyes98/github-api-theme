@@ -20,20 +20,20 @@ requested_data = requested_data.replace(/&#x2f;/g, "/"); //replacing &#x2f; mark
 requested_data = JSON.parse(requested_data);
 
 class Issue {
-  constructor(state, title, body, subject, labels, creator, locked, assignees, comments, author_association, created_at, updated_at, closed_at) {
-    this.state = state;
-    this.title = title;
-    this.body = body;
-    this.subject = subject;
+  constructor(status, title, body, subject, labels, creator, locked, assignees, comments, author_association, created_at, updated_at, closed_at) {
+    this.status = status; //status of issues 
+    this.title = title; //title of the issues 
+    this.body = body; //body of the issue
+    this.subject = subject; //subject of the issue
     this.labels = labels; //an array of labels
-    this.creator = creator;
-    this.locked = locked;
-    this.assignees = assignees;
+    this.creator = creator; //creator
+    this.locked = locked; // is it locked 
+    this.assignees = assignees; //people assigened to the issue
     this.comments = comments; //an array of comments
-    this.author_association = author_association;
-    this.created_at = this.format_date(created_at);
-    this.updated_at = this.format_date(updated_at);
-    this.closed_at = this.format_date(closed_at);
+    this.author_association = author_association; //author association to the issue , MEMBER , CREATOR , DEVELOPER , etc...
+    this.created_at = this.format_date(created_at); //date of creation 
+    this.updated_at = this.format_date(updated_at);//date of change 
+    this.closed_at = this.format_date(closed_at);//date the issue was closed, it will Nan/Nan/Nan when date doesn't exist aka the issue is still open  
 
   }
 
@@ -97,7 +97,15 @@ let table = new Tabulator(tableId, {
         headerFilter: "input",
         headerFilterPlaceholder: "Filter {{column.name}}",
         headerFilterFunc: "like",
-        formatter: "textarea",
+        formatter: function (cell, formatterParams, onRendered) {
+          //cell - the cell component
+          //formatterParams - parameters set for the column
+          //onRendered - function to call when the formatter has been rendered
+
+          cell.getElement().setAttribute("title_of_data", cell._cell.column.definition.title); //adding the attribute to each cell with the same value as the title of the column header in for that cell
+
+			    return this.emptyToSpace(this.sanitizeHTML(cell.getValue()));
+        },
         
         // resizable: false,
       },

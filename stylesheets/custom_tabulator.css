@@ -654,49 +654,55 @@
     padding-top: 6px;
     font-weight: bold; }
 
-.tabulator-headers, .tabulator-row {
+.lighttouch_table .tabulator-row {
   display: grid;
   grid-template-columns: repeat(1, minmax(20px, 100%)); }
-  @media (min-width: 576px) {
-    .tabulator-headers, .tabulator-row {
-      grid-template-columns: repeat(1, minmax(20px, 100%)); } }
   @media (min-width: 768px) {
-    .tabulator-headers, .tabulator-row {
+    .lighttouch_table .tabulator-row {
       grid-template-columns: repeat(4, minmax(20px, 100%)); } }
   @media (min-width: 992px) {
-    .tabulator-headers, .tabulator-row {
+    .lighttouch_table .tabulator-row {
       grid-template-columns: repeat(6, minmax(20px, 100%)); } }
-  @media (min-width: 1200px) {
-    .tabulator-headers, .tabulator-row {
-      grid-template-columns: repeat(8, minmax(20px, 100%)); } }
 
-.tabulator-col, .tabulator-cell {
-  border: 1px solid #999999; }
-  .tabulator-col:hover, .tabulator-cell:hover {
-    background-color: #e0dede; }
-
-.tabulator-row {
+.lighttouch_table .tabulator-headers {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(20px, 100%)); }
+  @media (min-width: 768px) {
+    .lighttouch_table .tabulator-headers {
+      grid-template-columns: repeat(4, minmax(20px, 100%)); } }
+  @media (min-width: 992px) {
+    .lighttouch_table .tabulator-headers {
+      grid-template-columns: repeat(6, minmax(20px, 100%)); } }
+.lighttouch_table .tabulator-row {
+  border-bottom: 1px solid #000;
   grid-template-rows: minmax(30px, 100%); }
-
-.tabulator-cell {
+.lighttouch_table .tabulator-cell {
+  border: 1px solid #999999;
+  box-sizing: border-box;
   height: auto;
   white-space: normal !important;
   text-overflow: clip !important;
-  padding-bottom: 10px;
-  word-break: break-all; }
-
-.tabulator-col-content {
-  background-color: #22292f; }
-  .tabulator-col-content:hover {
+  padding: 5px;
+  display: block; }
+  .lighttouch_table .tabulator-cell:hover {
+    background-color: #e0dede; }
+  .lighttouch_table .tabulator-cell::before {
+    content: attr(title_of_data) ": ";
+    font-weight: bolder; }
+    @media (min-width: 768px) {
+      .lighttouch_table .tabulator-cell::before {
+        content: none; } }
+.lighttouch_table .tabulator-col-content {
+  background-color: #22292f;
+  border: 1px solid #575e64;
+  box-sizing: border-box; }
+  .lighttouch_table .tabulator-col-content:hover {
     background-color: #000; }
-
-.tabulator-col-title {
+.lighttouch_table .tabulator-col-title {
   color: #FFF; }
-
-.tabulator-row-odd {
+.lighttouch_table .tabulator-row-odd {
   background-color: #FFF; }
-
-.tabulator-row-even {
+.lighttouch_table .tabulator-row-even {
   background-color: #dae1e7; }
 
 /*# sourceMappingURL=custom_tabulator.css.map */
