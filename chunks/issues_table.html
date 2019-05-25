@@ -1,8 +1,6 @@
 <div git_table >
-  <h1> Issue table</h1>
-  
-  {# include "chunks/issues_table_filter.html" #}
-
+  <h1 title> Issue table</h1>
+  {{git_response}}
   <!-- Tabulator.js table to display all of the data -->
   <div grid_table id="{{issue_table_id}}"></div>
   
