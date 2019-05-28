@@ -3,18 +3,7 @@
 
 let tableId = "#{{issue_table_id}}";
 
-let response = "{{git_response}}";
-
-function server_response_to_dict(server_response) {
-  let response = server_response
-
-  response = response.replace(/&quot;/g, "\""); //replacing &quot; mark for " for javascript
-  response = response.replace(/&#x2f;/g, "/"); //replacing &#x2f; mark for /  for urls 
-  response = JSON.parse(response);
-  return response;  
-}
-
-response = server_response_to_dict(response);
+let server_response = {{ git_response | safe }};
 
 /**
  * Class for organization of the table data , 
