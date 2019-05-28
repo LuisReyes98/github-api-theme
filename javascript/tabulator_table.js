@@ -1,25 +1,27 @@
 {% include "javascript/tabulator_table_dependencies.js" %}
 
 
-let requested_data = '{{response_json}}'; //getting the data in json format from the lighttouch server
 let tableId = "#{{issue_table_id}}";
 
-let github_data = '';
-// Class to standarize the data 
+let response = "{{git_response}}";
 
-function temporal_json_parser(the_json) {
-  
+function server_response_to_dict(server_response) {
+  let response = server_response
+
+  response = response.replace(/&quot;/g, "\""); //replacing &quot; mark for " for javascript
+  response = response.replace(/&#x2f;/g, "/"); //replacing &#x2f; mark for /  for urls 
+  response = JSON.parse(response);
+  return response;  
 }
-// github_data = github_data.replace(/&quot;/g, "\""); //replacing &quot; mark for " for javascript
-// github_data = github_data.replace(/&#x2f;/g, "/"); //replacing &#x2f; mark for /  for urls 
-// github_data = JSON.parse(github_data);
 
-// Transforming data sended by the server into a js hash
-requested_data = requested_data.replace(/&quot;/g, "\""); //replacing &quot; mark for " for javascript
-requested_data = requested_data.replace(/&#x2f;/g, "/"); //replacing &#x2f; mark for /  for urls 
-requested_data = JSON.parse(requested_data);
+response = server_response_to_dict(response);
 
+/**
+ * Class for organization of the table data , 
+ * each field of this class must be a column in row of the table
+ */
 class Issue {
+
   constructor(status, title, body, subject, labels, creator, locked, assignees, comments, author_association, created_at, updated_at, closed_at) {
     this.status = status; //status of issues 
     this.title = title; //title of the issues 
@@ -46,42 +48,43 @@ class Issue {
 // This considering is the github request
 
 // turning the js hash into an array of Issue prototype in order to properly display data
-let cleaned_data = requested_data.items.map(function (item) {
-  let labels = " "
-  let assignees = " "
-  let comments = " "
-  try {  
-    labels = item.labels.map(el => el.name); 
-  } catch (error) { }
-  try {
-    assignees = item.assignees.map(el => el.name);
-  } catch (error) {}
-  try {
-    comments = item.comments_content.map(el => `${el.title} by ${el.creator}:\n ${el.body}`);
-  } catch (error) {}
 
-  return new Issue(
-    item.state,
-    item.title,
-    item.body,
-    item.subject,
-    labels,
-    item.creator,
-    item.locked,
-    assignees,
-    comments,
-    item.author_association,
-    item.created_at,
-    item.updated_at,
-    item.closed_at,
-  );
-});
+// let cleaned_data = requested_data.items.map(function (item) {
+//   let labels = " "
+//   let assignees = " "
+//   let comments = " "
+//   try {  
+//     labels = item.labels.map(el => el.name); 
+//   } catch (error) { }
+//   try {
+//     assignees = item.assignees.map(el => el.name);
+//   } catch (error) {}
+//   try {
+//     comments = item.comments_content.map(el => `${el.title} by ${el.creator}:\n ${el.body}`);
+//   } catch (error) {}
+
+//   return new Issue(
+//     item.state,
+//     item.title,
+//     item.body,
+//     item.subject,
+//     labels,
+//     item.creator,
+//     item.locked,
+//     assignees,
+//     comments,
+//     item.author_association,
+//     item.created_at,
+//     item.updated_at,
+//     item.closed_at,
+//   );
+// });
 
 
 
 // Tabulator component
 let table = new Tabulator(tableId, {
-  data: cleaned_data,  
+  data: [],  
   // autoResize: true,
   pagination: "local", //enable local pagination.
   paginationSize: 4, //ammount of elements per page  
@@ -89,13 +92,12 @@ let table = new Tabulator(tableId, {
   tooltips: true,            //show tool tips on cells
   // layout: "fitColumns",
   columns: [
-    {% for column in issue_columns %}
       {
-        title: "{{column.name}}",
-        field: "{{column.value}}",
+        title: "column_name",
+        field: "column_value",
         sorter: "string",
         headerFilter: "input",
-        headerFilterPlaceholder: "Filter {{column.name}}",
+        headerFilterPlaceholder: "Filter column_name",
         headerFilterFunc: "like",
         formatter: function (cell, formatterParams, onRendered) {
           //cell - the cell component
@@ -109,7 +111,6 @@ let table = new Tabulator(tableId, {
         
         // resizable: false,
       },
-    {% endfor %}
   ],
 
 });
@@ -118,26 +119,3 @@ let table = new Tabulator(tableId, {
 window.addEventListener('resize', function () {
   table.redraw(true); //reloading table visuals
 });
-
-// Filtering functions
-// This could be done without Jquery if jquery wont be used for anythin else this should be refactor to plain js
-
-// function clearTableFilters() {
-//   $("#table-filter-field").val("");
-//   $("#table-filter-value").val("");
-
-//   table.clearFilter();
-// }
-// // Table filters
-
-// function updateFilter() {
-//   var filter = $("#table-filter-field").val();
-//   if (filter !== "") {
-//     $("#table-filter-value").prop("disabled", false);  
-//     table.setFilter(filter, "like", $("#table-filter-value").val()); //to search values like the input    
-//   }
-// }
-
-// //Update filters on value change
-// $("#table-filter-field").change(updateFilter);
-// $("#table-filter-value").keyup(updateFilter);
