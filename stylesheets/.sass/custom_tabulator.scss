@@ -55,7 +55,14 @@
   
   // Container of each row of data
   .tabulator-row{
+    
+
     @extend %grid_container;
+    
+    &:hover{
+      background-color: #e0dede; //row hover color
+    }
+
     border-bottom: 1px solid #000;
 
     grid-template-rows: minmax(30px, 100%);
@@ -67,27 +74,33 @@
     box-sizing: border-box;
   
     height: auto;
-    white-space: normal !important;
-    text-overflow: clip !important;
+
+    // min-height: 100px;
+
+    max-height: 250px;
+    
+
+    // white-space: normal !important;
+    // text-overflow: clip !important;
     padding: 5px;
     display: block;
     
     &:hover {
-      background-color: #e0dede;
+      background-color: #ffffff;
     }
     // Message before cell data for small sizes where columns header occupy too much space
     &::before{
       content: attr(title_of_data) ": ";
       font-weight: bolder;
 
-      @include screen_md() {
-        content: none;
-      }
+      // @include screen_md() {
+      //   content: none;
+      // }
     }
   
   }
   
-  
+  // table columns header
   .tabulator-col-content{
     background-color: #22292f;  
     &:hover{
@@ -97,14 +110,16 @@
     box-sizing: border-box;
   
   }
+  // color of text in column header
   .tabulator-col-title{
     color: #FFF;
   
   }
-  
+  // background of odd row
   .tabulator-row-odd{
     background-color: #FFF;
   } 
+  // background of even row
   .tabulator-row-even{
     background-color: #dae1e7;
   

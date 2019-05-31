@@ -676,22 +676,20 @@
 .lighttouch_table .tabulator-row {
   border-bottom: 1px solid #000;
   grid-template-rows: minmax(30px, 100%); }
+  .lighttouch_table .tabulator-row:hover {
+    background-color: #e0dede; }
 .lighttouch_table .tabulator-cell {
   border: 1px solid #999999;
   box-sizing: border-box;
   height: auto;
-  white-space: normal !important;
-  text-overflow: clip !important;
+  max-height: 250px;
   padding: 5px;
   display: block; }
   .lighttouch_table .tabulator-cell:hover {
-    background-color: #e0dede; }
+    background-color: #ffffff; }
   .lighttouch_table .tabulator-cell::before {
     content: attr(title_of_data) ": ";
     font-weight: bolder; }
-    @media (min-width: 768px) {
-      .lighttouch_table .tabulator-cell::before {
-        content: none; } }
 .lighttouch_table .tabulator-col-content {
   background-color: #22292f;
   border: 1px solid #575e64;

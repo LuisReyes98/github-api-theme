@@ -13,11 +13,12 @@ function stringFormatUnderScoreToSpace(someText) {
 // Tabulator component
 let table = new Tabulator($tableId, {
   data: server_response,
-  // autoResize: true,
   pagination: "local", //enable local pagination.
-  paginationSize: 4, //ammount of elements per page  
-  // movableColumns: true, //allow column order to be changed  
+  paginationSize: 10, //ammount of elements per page  
+  paginationSizeSelector: true,
   tooltips: true,            //show tool tips on cells
+  // autoResize: true,
+  // movableColumns: true, //allow column order to be changed  
   // layout: "fitColumns",
   columns: Object.keys(server_response[0]).map(function (item) {
     /*for each key values in the first element assuming all elemnents behave the same

@@ -1,6 +1,15 @@
 <div git_table >
   <h1 title> Issue table</h1>
-  
+  {% if git_response.error %}
+    <h1>
+      Request error
+    </h1>
+    <h2>
+      Api error
+    </h2>
+
+  {% endif %}
+
   <!-- Tabulator.js table to display all of the data -->
   <div grid_table id="{{issue_table_id}}"></div>
   
