@@ -1,0 +1,8 @@
+bg-blue-300
+rounded
+text-white
+font-bold
+hover:bg-blue-500
+p-2
+inline
+mx-0
