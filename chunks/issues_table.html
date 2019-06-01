@@ -1,14 +1,25 @@
 <div git_table >
-  <h1 title> Issue table</h1>
-  {% if git_response.error %}
-    <h1>
-      Request error
-    </h1>
-    <h2>
-      Api error
-    </h2>
-
+  <div title_container >
+    <h1 title> Issue table</h1>
+  </div>
+  {% if  not processed_request or git_response.error  %}
+    
+    <div error_container>
+      <h2 error_message> Error in github api Request</h2>
+      <p>
+        <b>Message:</b> {{server_response}}
+      </p>
+    </div>    
   {% endif %}
+
+
+  <div warning id="entries_warning">
+    <h2>
+      No entries found
+    </h2>    
+  </div>
+
+
 
   <!-- Tabulator.js table to display all of the data -->
   <div grid_table id="{{issue_table_id}}"></div>
