@@ -1,6 +1,7 @@
 <div git_table >
   
   <div title_container>
+    
     <h1 title> Issue table</h1>
   
     <form search_form action="/git">
@@ -9,32 +10,12 @@
       <button submit type="submit"> Search </button>
     </form>
   </div>
-  {% if  not processed_request or git_response.error  %}
-    
-    <div error_container>
-      <h2 error_message> Error in github api Request</h2>
-      <p>
-        <b>Message:</b> {{server_response}}
-      </p>
-      <p>
-        {% if git_response.error %}
-          {{git_response.error}}
-        {%endif%}
-      </p>
-    </div>    
-  {% endif %}
 
-
-  <div warning id="entries_warning">
-    <h2>
-      No entries found
-    </h2>    
-  </div>
-
-
-
+  {% include 'chunks/issues_table_warnings.html' %}
   <!-- Tabulator.js table to display all of the data -->
   <div grid_table id="{{issue_table_id}}"></div>
   
+  {% include 'chunks/issues_table_paginator.html' %}
 
+  
 </div>

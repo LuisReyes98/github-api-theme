@@ -23,10 +23,13 @@ if (typeof (server_response) !== "string"){
     // Tabulator component
     let table = new Tabulator($tableId, {
       data: server_response,
-      pagination: "local", //enable local pagination.
+      // pagination: "local", //enable local pagination.
+
       paginationSize: 10, //ammount of elements per page  
-      paginationSizeSelector: true,
+      // paginationSizeSelector: true, //amount of elements per page 
       tooltips: true,            //show tool tips on cells
+
+
       // autoResize: true,
       // movableColumns: true, //allow column order to be changed  
       // layout: "fitColumns",
