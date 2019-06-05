@@ -1,9 +1,15 @@
 <div footer_pagination >
-{% for link in pages_header %}
-    <b>
-        {{link}}        
-    </b>
-    <br>
-{% endfor %}
+{% if processed_headers %}
+    {% for link in pages_header %}
+        <b>
+            {{link}}        
+        </b>
+        <br>
+    {% endfor %}
 
+{% endif %}
+
+    <h4>
+        Total Pages: {{total_pages}}
+    </h4>
 </div>
