@@ -1,15 +1,41 @@
 <div footer_pagination >
-{% if processed_headers %}
-    {% for link in pages_header %}
-        <b>
-            {{link}}        
-        </b>
-        <br>
-    {% endfor %}
-
-{% endif %}
-
     <h4>
         Total Pages: {{total_pages}}
     </h4>
+    <lu>
+        {% if search_for %}
+            {% set page = current_page%}
+            {% if page > 1 %}
+                <li>
+                    <a href="/git?search_for={{search_for}}&page=1">First</a>
+                </li>
+            
+            {% endif %}
+
+            {% if page > 1 %}
+                <li>
+                    <a href="/git?search_for={{search_for}}&page={{page - 1}}">Previous</a>
+                </li>            
+            {% endif %}        
+            
+            <li>
+                Current page {{page}}             
+            </li>
+
+            {% if page < total_pages %}
+                <li>
+                    <a href="/git?search_for={{search_for}}&page={{page + 1}}">Next</a>
+                </li>
+            
+            {% endif %}
+            {% if page < total_pages %}
+                <li>
+                    <a href="/git?search_for={{search_for}}&page={{total_pages}}">Last</a>
+                </li>
+            
+            {% endif %}
+        
+        {% endif %}
+
+    </lu>
 </div>
