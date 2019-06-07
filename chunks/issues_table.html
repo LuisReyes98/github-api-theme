@@ -1,15 +1,6 @@
 <div git_table >
-  
-  <div title_container>
-    
-    <h1 title> Issue table</h1>
-  
-    <form search_form action="/git">
-      <input search type="text" name="search_for" value="{% if search_for %}{{search_for}}{% endif %}">
-  
-      <button submit type="submit"> Search </button>
-    </form>
-  </div>
+
+  {% include 'chunks/issues_table_header.html' %}  
 
   {% include 'chunks/issues_table_warnings.html' %}
   <!-- Tabulator.js table to display all of the data -->

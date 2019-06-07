@@ -654,6 +654,41 @@
     padding-top: 6px;
     font-weight: bold; }
 
+.border-box {
+  box-sizing: border-box; }
+
+.triangle_after::after {
+  content: "";
+  box-sizing: border-box;
+  height: 10px;
+  width: 10px;
+  transition: 100ms all ease;
+  will-change: border-width;
+  cursor: pointer;
+  border-style: solid;
+  border-width: calc(10px/2) 0 calc(10px/2) 10px;
+  border-color: transparent transparent transparent #000;
+  margin-top: 5px;
+  margin-left: 4px; }
+.triangle_after:hover::after {
+  border-color: transparent transparent transparent #fff; }
+
+.triangle_before::before {
+  content: "";
+  box-sizing: border-box;
+  height: 10px;
+  width: 10px;
+  transition: 100ms all ease;
+  will-change: border-width;
+  cursor: pointer;
+  border-style: solid;
+  border-width: calc(10px/2) 10px calc(10px/2) 0;
+  border-color: transparent #000 transparent transparent;
+  margin-top: 5px;
+  margin-right: 4px; }
+.triangle_before:hover::before {
+  border-color: transparent #fff transparent transparent; }
+
 .lighttouch_table .tabulator-row {
   display: grid;
   grid-template-columns: repeat(1, minmax(20px, 100%)); }

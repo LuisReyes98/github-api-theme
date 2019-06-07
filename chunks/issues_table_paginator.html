@@ -1,41 +1,32 @@
 <div footer_pagination >
-    <h4>
-        Total Pages: {{total_pages}}
-    </h4>
-    <lu>
+    <ul pages_contatiner >
         {% if search_for %}
             {% set page = current_page%}
             {% if page > 1 %}
-                <li>
-                    <a href="/git?search_for={{search_for}}&page=1">First</a>
-                </li>
-            
+                <a first_page href="/git?search_for={{search_for}}&page=1"> 1 </a>
             {% endif %}
 
-            {% if page > 1 %}
-                <li>
-                    <a href="/git?search_for={{search_for}}&page={{page - 1}}">Previous</a>
-                </li>            
-            {% endif %}        
-            
-            <li>
-                Current page {{page}}             
+            {% if page > 2 %}
+
+                {% if page > 3 %}
+                    <li page_element> ... </li>
+                {% endif %}
+                <a previous_page href="/git?search_for={{search_for}}&page={{page - 1}}"> {{page - 1}} </a>
+            {% endif %}
+            <li current_page>
+                {{page}}
             </li>
 
-            {% if page < total_pages %}
-                <li>
-                    <a href="/git?search_for={{search_for}}&page={{page + 1}}">Next</a>
-                </li>
-            
+            {% if page < total_pages - 1 %}
+                <a next_page href="/git?search_for={{search_for}}&page={{page + 1}}"> {{page + 1}} </a>
             {% endif %}
             {% if page < total_pages %}
-                <li>
-                    <a href="/git?search_for={{search_for}}&page={{total_pages}}">Last</a>
-                </li>
-            
+                {% if page < total_pages - 1 %}
+                    <li page_element> ... </li>
+                {% endif %}
+                <a last_page href="/git?search_for={{search_for}}&page={{total_pages}}"> {{total_pages}} </a>
             {% endif %}
-        
         {% endif %}
 
-    </lu>
+    </ul>
 </div>
