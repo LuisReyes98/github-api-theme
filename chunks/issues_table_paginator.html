@@ -1,5 +1,5 @@
-{% if  not processed_request or git_response.error  %}
-<div footer_pagination >
+{% if processed_request   %}
+<div footer_pagination  id="issues_table_pagination">
     <ul pages_contatiner >
         {% if search_for %}
             {% set page = current_page%}
