@@ -1,3 +1,4 @@
+{% if  not processed_request or git_response.error  %}
 <div footer_pagination >
     <ul pages_contatiner >
         {% if search_for %}
@@ -30,3 +31,4 @@
 
     </ul>
 </div>
+{% endif %}
