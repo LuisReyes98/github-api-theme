@@ -1,5 +1,4 @@
 {% if  not processed_request or git_response.error  %}
-    
 <div error_container>
     <h2 error_message> Error in github api Request</h2>
     <p>
@@ -10,12 +9,12 @@
             {{git_response.error}}
         {%endif%}
     </p>
-</div>    
+</div>
 {% endif %}
 
 
 <div warning id="entries_warning">
     <h2>
         No entries found
-    </h2>    
+    </h2>
 </div>
