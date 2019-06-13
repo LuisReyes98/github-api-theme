@@ -4,7 +4,7 @@
         {% if search_for %}
             {% set page = current_page%}
             {% if page > 1 %}
-                <a first_page href="/git?search_for={{search_for}}&page=1"> 1 </a>
+                <a first_page href="{{current_url}}?search_for={{search_for}}&page=1"> 1 </a>
             {% endif %}
 
             {% if page > 2 %}
@@ -12,20 +12,20 @@
                 {% if page > 3 %}
                     <li page_element> ... </li>
                 {% endif %}
-                <a previous_page href="/git?search_for={{search_for}}&page={{page - 1}}"> {{page - 1}} </a>
+                <a previous_page href="{{current_url}}?search_for={{search_for}}&page={{page - 1}}"> {{page - 1}} </a>
             {% endif %}
             <li current_page>
                 {{page}}
             </li>
 
             {% if page < total_pages - 1 %}
-                <a next_page href="/git?search_for={{search_for}}&page={{page + 1}}"> {{page + 1}} </a>
+                <a next_page href="{{current_url}}?search_for={{search_for}}&page={{page + 1}}"> {{page + 1}} </a>
             {% endif %}
             {% if page < total_pages %}
                 {% if page < total_pages - 1 %}
                     <li page_element> ... </li>
                 {% endif %}
-                <a last_page href="/git?search_for={{search_for}}&page={{total_pages}}"> {{total_pages}} </a>
+                <a last_page href="{{current_url}}?search_for={{search_for}}&page={{total_pages}}"> {{total_pages}} </a>
             {% endif %}
         {% endif %}
 

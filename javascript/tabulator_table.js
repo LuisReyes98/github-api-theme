@@ -25,7 +25,7 @@ if (typeof (server_response) !== "string"){
     let table = new Tabulator($tableId, {
       data: server_response,
       // pagination: "local", //enable local pagination.
-      paginationSize: 10, //ammount of elements per page
+      paginationSize: {{ data_per_page | safe }}, //ammount of elements per page
       // paginationSizeSelector: true, //amount of elements per page
       tooltips: true,            //show tool tips on cells
       // autoResize: true,
