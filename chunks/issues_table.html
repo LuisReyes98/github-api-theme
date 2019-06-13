@@ -1,10 +1,12 @@
 <div git_table >
-  <h1> Issue table</h1>
-  
-  {# include "chunks/issues_table_filter.html" #}
 
+  {% include 'chunks/issues_table_header.html' %}
+
+  {% include 'chunks/issues_table_warnings.html' %}
   <!-- Tabulator.js table to display all of the data -->
   <div grid_table id="{{issue_table_id}}"></div>
-  
+
+  {% include 'chunks/issues_table_paginator.html' %}
+
 
 </div>

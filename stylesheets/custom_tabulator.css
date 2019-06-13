@@ -654,6 +654,41 @@
     padding-top: 6px;
     font-weight: bold; }
 
+.border-box {
+  box-sizing: border-box; }
+
+.triangle_after::after {
+  content: "";
+  box-sizing: border-box;
+  height: 10px;
+  width: 10px;
+  transition: 100ms all ease;
+  will-change: border-width;
+  cursor: pointer;
+  border-style: solid;
+  border-width: calc(10px/2) 0 calc(10px/2) 10px;
+  border-color: transparent transparent transparent #000;
+  margin-top: 5px;
+  margin-left: 4px; }
+.triangle_after:hover::after {
+  border-color: transparent transparent transparent #fff; }
+
+.triangle_before::before {
+  content: "";
+  box-sizing: border-box;
+  height: 10px;
+  width: 10px;
+  transition: 100ms all ease;
+  will-change: border-width;
+  cursor: pointer;
+  border-style: solid;
+  border-width: calc(10px/2) 10px calc(10px/2) 0;
+  border-color: transparent #000 transparent transparent;
+  margin-top: 5px;
+  margin-right: 4px; }
+.triangle_before:hover::before {
+  border-color: transparent #fff transparent transparent; }
+
 .lighttouch_table .tabulator-row {
   display: grid;
   grid-template-columns: repeat(1, minmax(20px, 100%)); }
@@ -676,22 +711,20 @@
 .lighttouch_table .tabulator-row {
   border-bottom: 1px solid #000;
   grid-template-rows: minmax(30px, 100%); }
+  .lighttouch_table .tabulator-row:hover {
+    background-color: #e0dede; }
 .lighttouch_table .tabulator-cell {
   border: 1px solid #999999;
   box-sizing: border-box;
   height: auto;
-  white-space: normal !important;
-  text-overflow: clip !important;
+  max-height: 250px;
   padding: 5px;
   display: block; }
   .lighttouch_table .tabulator-cell:hover {
-    background-color: #e0dede; }
+    background-color: #ffffff; }
   .lighttouch_table .tabulator-cell::before {
     content: attr(title_of_data) ": ";
     font-weight: bolder; }
-    @media (min-width: 768px) {
-      .lighttouch_table .tabulator-cell::before {
-        content: none; } }
 .lighttouch_table .tabulator-col-content {
   background-color: #22292f;
   border: 1px solid #575e64;

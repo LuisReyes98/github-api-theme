@@ -1,0 +1,10 @@
+py-3
+px-4
+
+font-bold
+text-white
+bg-blue-600
+
+cursor-pointer
+
+border-box

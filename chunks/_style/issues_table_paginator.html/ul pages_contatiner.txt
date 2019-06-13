@@ -1,0 +1,11 @@
+absolute
+flex
+inline-flex
+m-4
+
+right-0
+top-0
+rounded
+border-2
+border-blue-600
+list-none

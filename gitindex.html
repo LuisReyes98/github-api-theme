@@ -1,0 +1,31 @@
+{% block style %}
+  {{ super() }}  
+
+  {% include "headers/gitapi_styles.html" %}
+{% endblock style %}
+
+
+
+{% block event_input %}
+  {{ super() }}
+
+{% endblock event_input %}
+
+
+
+{% block content %}
+
+  {{ super() }}     
+  <h1> GIT DISPLAY DEFAULT TABLE </h1>
+
+  {% include "chunks/issues_table.html" %}
+
+{% endblock content %}
+
+{% block footer %}
+  {{ super() }}     
+
+  {% include "chunks/issues_table_script.html" %}
+
+
+{% endblock footer %}    

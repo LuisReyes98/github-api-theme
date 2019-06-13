@@ -1,0 +1,12 @@
+py-3
+px-4
+font-bold
+cursor-pointer
+
+border-r-2
+border-blue-600
+
+hover:bg-blue-500
+hover:text-white
+
+border-box

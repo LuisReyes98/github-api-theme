@@ -1,0 +1,5 @@
+bg-yellow-500
+rounded
+text-2xl
+p-4
+hidden
